@@ -45,13 +45,15 @@ class JFormFieldText extends JFormField
 		$readonly = ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
 		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$required = $this->required ? ' required="required" aria-required="true"' : '';
-		$placeholder = !empty($this->hint) ? 'placeholder="'.$this->hint.'"':'';
+		$autocomplete = $this->autocomplete ? ' autocomplete="on"' : ' autocomplete="off"';
+		$placeholder = !empty($this->hint) ? ' placeholder="'.$this->hint.'"':'';
 		
 		// Initialize JavaScript field attributes.
 		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
 
 		return '<input type="text" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"'. $placeholder
-			. $class . $size . $disabled . $readonly . $onchange . $maxLength . $required . '/>';
+			. $class . $size . $disabled . $readonly . $onchange . $maxLength . $required 
+			. $autocomplete . '/>';
 	}
 }

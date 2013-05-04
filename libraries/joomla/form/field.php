@@ -149,6 +149,15 @@ abstract class JFormField
 	protected $required = false;
 
 	/**
+	 * The autocomplete state for the form field.  If true then browser can provide an auto-complete
+	 list for possible suggestion.
+	 *
+	 * @var    boolean
+	 * @since  11.1
+	 */
+	protected $autocomplete = true;
+	
+	/**
 	 * The disabled state for the form field.  If true then there must not be a possibility
 	 * to change the pre-selected value, and the value must not be submitted by the browser.
 	 *
@@ -277,6 +286,7 @@ abstract class JFormField
 			case 'required':
 			case 'disabled':
 			case 'readonly':
+			case 'autocomplete';
 			case 'type':
 			case 'validate':
 			case 'hint':
@@ -363,12 +373,14 @@ abstract class JFormField
 		$name = (string) $element['name'];
 		$required = (string) $element['required'];
 		$disabled = (string) $element['disabled'];
+		$autocomplete = (string) $element['autocomplete'];
 		$readonly = (string) $element['readonly'];
 
 		// Set the required, disabled and validation options.
 		$this->required = ($required == 'true' || $required == 'required' || $required == '1');
 		$this->disabled = ($disabled == 'true' || $disabled == 'disabled' || $disabled == '1');
 		$this->readonly = ($readonly == 'true' || $readonly == 'readonly' || $readonly == '1');
+		$this->autocomplete = !($autocomplete == 'false' || $autocomplete == 'off' || $autocomplete == '0');
 		$this->validate = (string) $element['validate'];
 
 		// Add the required class if the field is required.
