@@ -218,6 +218,14 @@ abstract class JFormField
 	protected $hint;
 	
 	/**
+	 * The CSS class of the form field
+	 *
+	 * @var    mixed
+	 * @since  11.1
+	 */
+	protected $class;
+	
+	/**
 	 * The label's CSS class of the form field
 	 *
 	 * @var    mixed
@@ -301,6 +309,7 @@ abstract class JFormField
 			case 'validate':
 			case 'hint':
 			case 'value':
+			case 'class':
 			case 'labelClass':
 			case 'fieldname':
 			case 'group':
@@ -377,10 +386,10 @@ abstract class JFormField
 		$this->element = $element;
 
 		// Get some important attributes from the form field element.
-		$class = (string) $element['class'];
 		$id = (string) $element['id'];
 		$multiple = (string) $element['multiple'];
 		$name = (string) $element['name'];
+		$class = !empty($element['class']) ? explode(",", $element['class']) : array();
 		$required = (string) $element['required'];
 		$disabled = (string) $element['disabled'];
 		$autocomplete = (string) $element['autocomplete'];
@@ -398,11 +407,11 @@ abstract class JFormField
 		// Add the required class if the field is required.
 		if ($this->required)
 		{
-			if ($class)
+			if (!empty($class))
 			{
-				if (strpos($class, 'required') === false)
+				if (in_array('required', $class) === false)
 				{
-					$this->element['class'] = $class . ' required';
+					$class[] = 'required';
 				}
 			}
 			else
@@ -449,6 +458,9 @@ abstract class JFormField
 		// Set the field default value.
 		$this->value = $value;
 
+		// Set the class of the field.
+		$this->class = $class;
+		
 		// Set the CSS class of field label
 		$this->labelClass = (string) $element['labelclass'];
 
