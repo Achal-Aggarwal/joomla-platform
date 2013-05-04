@@ -38,10 +38,13 @@ class JFormFieldEMail extends JFormField
 	 */
 	protected function getInput()
 	{
+		//Just for the time being. I am going to use postpendClass.
+		$this->class[] = "validate-email";
+		
 		// Initialize some field attributes.
 		$size = $this->element['size'] ? ' size="' . (int) $this->element['size'] . '"' : '';
 		$maxLength = $this->element['maxlength'] ? ' maxlength="' . (int) $this->element['maxlength'] . '"' : '';
-		$class = $this->element['class'] ? ' ' . (string) $this->element['class'] : '';
+		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 		$readonly = ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
 		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$required = $this->required ? ' required="required" aria-required="true"' : '';
@@ -49,7 +52,7 @@ class JFormFieldEMail extends JFormField
 		// Initialize JavaScript field attributes.
 		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
 
-		return '<input type="text" name="' . $this->name . '" class="validate-email' . $class . '" id="' . $this->id . '"' . ' value="'
+		return '<input type="text" name="' . $this->name . '"' . $class . ' id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"' . $size . $disabled . $readonly . $onchange . $maxLength . $required . '/>';
 	}
 }
