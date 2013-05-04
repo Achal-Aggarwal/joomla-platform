@@ -46,6 +46,7 @@ class JFormFieldText extends JFormField
 		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$required = $this->required ? ' required="required" aria-required="true"' : '';
 		$autocomplete = $this->autocomplete ? ' autocomplete="on"' : ' autocomplete="off"';
+		$autofocus = $this->autofocus ? ' autofocus' : '';
 		$placeholder = !empty($this->hint) ? ' placeholder="'.$this->hint.'"':'';
 		
 		// Initialize JavaScript field attributes.
@@ -54,6 +55,6 @@ class JFormFieldText extends JFormField
 		return '<input type="text" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"'. $placeholder
 			. $class . $size . $disabled . $readonly . $onchange . $maxLength . $required 
-			. $autocomplete . '/>';
+			. $autocomplete . $autofocus .'/>';
 	}
 }

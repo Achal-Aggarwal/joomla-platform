@@ -158,6 +158,15 @@ abstract class JFormField
 	protected $autocomplete = true;
 	
 	/**
+	 * The autofocus state for the form field.  If true then user agent will bring focus to the field
+	 automatically.
+	 *
+	 * @var    boolean
+	 * @since  11.1
+	 */
+	protected $autofocus = true;
+	
+	/**
 	 * The disabled state for the form field.  If true then there must not be a possibility
 	 * to change the pre-selected value, and the value must not be submitted by the browser.
 	 *
@@ -287,6 +296,7 @@ abstract class JFormField
 			case 'disabled':
 			case 'readonly':
 			case 'autocomplete';
+			case 'autofocus';
 			case 'type':
 			case 'validate':
 			case 'hint':
@@ -374,6 +384,7 @@ abstract class JFormField
 		$required = (string) $element['required'];
 		$disabled = (string) $element['disabled'];
 		$autocomplete = (string) $element['autocomplete'];
+		$autofocus = (string) $element['autofocus'];
 		$readonly = (string) $element['readonly'];
 
 		// Set the required, disabled and validation options.
@@ -381,6 +392,7 @@ abstract class JFormField
 		$this->disabled = ($disabled == 'true' || $disabled == 'disabled' || $disabled == '1');
 		$this->readonly = ($readonly == 'true' || $readonly == 'readonly' || $readonly == '1');
 		$this->autocomplete = !($autocomplete == 'false' || $autocomplete == 'off' || $autocomplete == '0');
+		$this->autofocus = ($autofocus == 'true' || $autofocus == 'on' || $autofocus == '1');
 		$this->validate = (string) $element['validate'];
 
 		// Add the required class if the field is required.
