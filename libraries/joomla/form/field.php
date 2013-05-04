@@ -398,9 +398,6 @@ abstract class JFormField
 
 		// Set the field description text.
 		$this->description = (string) $element['description'];
-		
-		// Set the field hint text.
-		$this->hint = (string) $element['hint'];
 
 		// Set the visibility.
 		$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden'] == 'true');
@@ -420,6 +417,10 @@ abstract class JFormField
 		$this->fieldname = $this->getFieldName($name);
 		$this->name = $this->getName($this->fieldname);
 		$this->id = $this->getId($id, $this->fieldname);
+		
+		// Get the hint text from the XML element, and do translation if required.
+		$this->hint = (string) $element['hint'];
+		$this->hint = $this->translateHint ? JText::_($this->hint) : $this->hint;
 
 		// Set the field default value.
 		$this->value = $value;
