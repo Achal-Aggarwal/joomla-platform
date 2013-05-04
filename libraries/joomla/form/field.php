@@ -75,6 +75,14 @@ abstract class JFormField
 	protected $translateDescription = true;
 
 	/**
+	 * True to translate the field hint string.
+	 *
+	 * @var    boolean
+	 * @since  now
+	 */
+	protected $translateHint = true;
+	
+	/**
 	 * The document id for the form field.
 	 *
 	 * @var    string
@@ -182,7 +190,15 @@ abstract class JFormField
 	 * @since  11.1
 	 */
 	protected $value;
-
+	
+	/**
+	 * The hint of the form field.
+	 *
+	 * @var string
+	 * @since now
+	 */
+	protected $hint;
+	
 	/**
 	 * The label's CSS class of the form field
 	 *
@@ -263,6 +279,7 @@ abstract class JFormField
 			case 'readonly':
 			case 'type':
 			case 'validate':
+			case 'hint':
 			case 'value':
 			case 'labelClass':
 			case 'fieldname':
@@ -381,14 +398,20 @@ abstract class JFormField
 
 		// Set the field description text.
 		$this->description = (string) $element['description'];
+		
+		// Set the field hint text.
+		$this->hint = (string) $element['hint'];
 
 		// Set the visibility.
 		$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden'] == 'true');
 
-		// Determine whether to translate the field label and/or description.
-		$this->translateLabel = !((string) $this->element['translate_label'] == 'false' || (string) $this->element['translate_label'] == '0');
+		// Determine whether to translate the field label and/or description and/or hint.
+		$this->translateLabel = !((string) $this->element['translate_label'] == 'false' 
+			|| (string) $this->element['translate_label'] == '0');
 		$this->translateDescription = !((string) $this->element['translate_description'] == 'false'
 			|| (string) $this->element['translate_description'] == '0');
+		$this->translateHint = !((string) $this->element['translate_hint'] == 'false' 
+			|| (string) $this->element['translate_hint'] == '0');
 
 		// Set the group of the field.
 		$this->group = $group;
