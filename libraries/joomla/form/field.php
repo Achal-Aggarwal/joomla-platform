@@ -149,7 +149,7 @@ abstract class JFormField
 	protected $required = false;
 
 	/**
-	 * The autocomplete state for the form field.  If true then browser can provide an auto-complete
+	 * The autocomplete state for the form field.  If true then user agent can provide an auto-complete
 	 list for possible suggestion.
 	 *
 	 * @var    boolean
