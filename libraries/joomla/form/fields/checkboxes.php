@@ -48,8 +48,11 @@ class JFormFieldCheckboxes extends JFormField
 	{
 		$html = array();
 
+		//Just for the time being. I am going to use postpendClass.
+		$this->class[] = "checkboxes";
+		
 		// Initialize some field attributes.
-		$class = $this->element['class'] ? ' class="checkboxes ' . (string) $this->element['class'] . '"' : ' class="checkboxes"';
+		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 		$checkedOptions = explode(',', (string) $this->element['checked']);
 
 		// Start the checkbox field output.
