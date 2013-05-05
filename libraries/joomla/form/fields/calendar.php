@@ -53,9 +53,9 @@ class JFormFieldCalendar extends JFormField
 		{
 			$attributes['maxlength'] = (int) $this->element['maxlength'];
 		}
-		if ($this->element['class'])
+		if (!empty($this->class))
 		{
-			$attributes['class'] = (string) $this->element['class'];
+			$attributes['class'] = (string) implode(" ", $this->class);
 		}
 		if ((string) $this->element['readonly'] == 'true')
 		{
