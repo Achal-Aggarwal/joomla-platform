@@ -38,9 +38,12 @@ class JFormFieldRadio extends JFormField
 	protected function getInput()
 	{
 		$html = array();
-
+		
+		//Just for the time being. I am going to use postpendClass.
+		$this->class[] = "radio";
+		
 		// Initialize some field attributes.
-		$class = $this->element['class'] ? ' class="radio ' . (string) $this->element['class'] . '"' : ' class="radio"';
+		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 
 		// Start the radio field output.
 		$html[] = '<fieldset id="' . $this->id . '"' . $class . '>';
