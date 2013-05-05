@@ -389,7 +389,7 @@ abstract class JFormField
 		$id = (string) $element['id'];
 		$multiple = (string) $element['multiple'];
 		$name = (string) $element['name'];
-		$class = !empty($element['class']) ? explode(",", $element['class']) : array();
+		$class = !empty($element['class']) ? explode(" ", $element['class']) : array();
 		$required = (string) $element['required'];
 		$disabled = (string) $element['disabled'];
 		$autocomplete = (string) $element['autocomplete'];
