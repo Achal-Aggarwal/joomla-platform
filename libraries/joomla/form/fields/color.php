@@ -39,7 +39,7 @@ class JFormFieldColor extends JFormField
 	{
 		// Initialize some field attributes.
 		$size = $this->element['size'] ? ' size="' . (int) $this->element['size'] . '"' : '';
-		$classes = (string) $this->element['class'];
+		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$required = $this->required ? ' required="required" aria-required="true"' : '';
 
@@ -57,8 +57,6 @@ class JFormFieldColor extends JFormField
 
 		// Initialize JavaScript field attributes.
 		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
-
-		$class = $classes ? ' class="' . trim($classes) . '"' : '';
 
 		return '<input type="text" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"' . $class . $size . $disabled . $onchange . $required . '/>';
