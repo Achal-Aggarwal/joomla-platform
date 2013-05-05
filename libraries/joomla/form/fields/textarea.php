@@ -39,7 +39,7 @@ class JFormFieldTextarea extends JFormField
 	protected function getInput()
 	{
 		// Initialize some field attributes.
-		$class = $this->element['class'] ? ' class="' . (string) $this->element['class'] . '"' : '';
+		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$columns = $this->element['cols'] ? ' cols="' . (int) $this->element['cols'] . '"' : '';
 		$rows = $this->element['rows'] ? ' rows="' . (int) $this->element['rows'] . '"' : '';
