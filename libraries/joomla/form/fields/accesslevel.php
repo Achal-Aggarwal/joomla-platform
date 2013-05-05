@@ -43,7 +43,7 @@ class JFormFieldAccessLevel extends JFormFieldList
 		$attr = '';
 
 		// Initialize some field attributes.
-		$attr .= $this->element['class'] ? ' class="' . (string) $this->element['class'] . '"' : '';
+		$attr .= !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
 		$attr .= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$attr .= $this->element['size'] ? ' size="' . (int) $this->element['size'] . '"' : '';
 		$attr .= $this->multiple ? ' multiple="multiple"' : '';
