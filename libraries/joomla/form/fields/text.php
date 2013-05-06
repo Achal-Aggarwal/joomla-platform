@@ -28,7 +28,14 @@ class JFormFieldText extends JFormField
 	 * @since  11.1
 	 */
 	protected $type = 'Text';
-
+	/**
+	 * The class to add at the end of class array
+	 *
+	 * @var    string
+	 * @since  11.1
+	 */
+	protected $postpendClass = '';
+	
 	/**
 	 * Method to get the field input markup.
 	 *
@@ -38,6 +45,9 @@ class JFormFieldText extends JFormField
 	 */
 	protected function getInput()
 	{
+		//add postpendClass in class array
+		$this->class[] = $this->postpendClass;
+		
 		// Initialize some field attributes.
 		$size = $this->element['size'] ? ' size="' . (int) $this->element['size'] . '"' : '';
 		$maxLength = $this->element['maxlength'] ? ' maxlength="' . (int) $this->element['maxlength'] . '"' : '';
@@ -52,7 +62,7 @@ class JFormFieldText extends JFormField
 		// Initialize JavaScript field attributes.
 		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
 
-		return '<input type="text" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
+		return '<input type="'.$this->type.'" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"'. $placeholder
 			. $class . $size . $disabled . $readonly . $onchange . $maxLength . $required 
 			. $autocomplete . $autofocus .'/>';

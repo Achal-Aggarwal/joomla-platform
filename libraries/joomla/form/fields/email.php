@@ -9,6 +9,8 @@
 
 defined('JPATH_PLATFORM') or die;
 
+JFormHelper::loadFieldClass('text');
+
 /**
  * Form Field class for the Joomla Platform.
  * Provides and input field for e-mail addresses
@@ -19,7 +21,7 @@ defined('JPATH_PLATFORM') or die;
  * @see         JFormRuleEmail
  * @since       11.1
  */
-class JFormFieldEMail extends JFormField
+class JFormFieldEMail extends JFormFieldText
 {
 	/**
 	 * The form field type.
@@ -30,29 +32,10 @@ class JFormFieldEMail extends JFormField
 	protected $type = 'Email';
 
 	/**
-	 * Method to get the field input markup for e-mail addresses.
+	 * The class to add at the end of class array
 	 *
-	 * @return  string  The field input markup.
-	 *
-	 * @since   11.1
+	 * @var    string
+	 * @since  11.1
 	 */
-	protected function getInput()
-	{
-		//Just for the time being. I am going to use postpendClass.
-		$this->class[] = "validate-email";
-		
-		// Initialize some field attributes.
-		$size = $this->element['size'] ? ' size="' . (int) $this->element['size'] . '"' : '';
-		$maxLength = $this->element['maxlength'] ? ' maxlength="' . (int) $this->element['maxlength'] . '"' : '';
-		$class = !empty($this->class) ? ' class = "' . implode(" ", $this->class) . '"' : '';
-		$readonly = ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
-		$disabled = ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
-		$required = $this->required ? ' required="required" aria-required="true"' : '';
-
-		// Initialize JavaScript field attributes.
-		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
-
-		return '<input type="text" name="' . $this->name . '"' . $class . ' id="' . $this->id . '"' . ' value="'
-			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"' . $size . $disabled . $readonly . $onchange . $maxLength . $required . '/>';
-	}
+	protected $postpendClass = 'validate-email';
 }
