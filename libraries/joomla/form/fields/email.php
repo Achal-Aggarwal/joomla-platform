@@ -32,10 +32,16 @@ class JFormFieldEMail extends JFormFieldText
 	protected $type = 'Email';
 
 	/**
-	 * The class to add at the end of class array
+	 * Method to get the field input markup.
 	 *
-	 * @var    string
-	 * @since  11.1
+	 * @return  string  The field input markup.
+	 *
+	 * @since   11.1
 	 */
-	protected $postpendClass = 'validate-email';
+	protected function getInput()
+	{
+		JHtml::_('jquery.framework');
+		JHtml::_('script', 'system/html5fallback.js', false, true);
+		return parent::getInput();
+	}
 }
